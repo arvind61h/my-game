@@ -1,0 +1,32 @@
+pipeline{
+    agent any
+    stages{
+        stage("SCM"){
+            steps{
+                git 'https://github.com/arvind61h/game-of-life.git'
+            }
+        }
+        stage('Test'){
+            steps{
+                sh 'mvn clean test'
+            }
+        }
+        stage('Build and Code Analysis')
+        {
+            steps
+            {
+                withSonarQubeEnv("SonarQube")
+                {
+                    sh 'mvn clean package sonar:sonar'
+                }
+
+            }
+        }
+    }
+    post {
+        always{
+            junit keepLongStdio: true, testResults: 'gameoflife-core/target/surefire-reports/*.xml'
+
+        }
+    }
+}
