@@ -11,16 +11,13 @@ pipeline{
                   step([$class: 'JUnitResultArchiver', testResults: 'gameoflife-core/target/surefire-reports/*.xml'])
             }
         }
-        stage('Build'){
-            steps{
-                sh 'mvn package install'
-            }
-        }
-        stage('Code-Analysis'){
-            tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-            steps{
-                withSonarQube('MysonarQube'){
-                    sh 'sonar-scanner'
+        stage('build && SonarQube analysis') {
+            steps {
+                withSonarQubeEnv('Sonar-1') {
+                    // Optionally use a Maven environment you've configured already
+                    //withMaven(maven:'Maven 3.5') {
+                        sh 'mvn clean package sonar:sonar'
+                    }
                 }
             }
         }
