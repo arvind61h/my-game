@@ -13,8 +13,10 @@ pipeline{
         }
         stage('build && SonarQube analysis'){
             steps{
-                ithSonarQubeEnv('Sonar-1'){
-                    sh 'mvn clean package sonar:sonar'
+                withSonarQubeEnv('Sonar-1'){
+                    withMaven(maven:'Maven 3.6.0'){
+                        sh 'mvn package sonar:sonar'
+                    }
                 }
             }
         }
