@@ -23,11 +23,7 @@ pipeline
                 }
             }
         }
-    }
-    post
-    {
-        success
-        {
+        stage('Deploy Binaries To Artifacts'){
             steps
             {
                  rtUpload(
