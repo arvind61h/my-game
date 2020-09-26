@@ -8,18 +8,14 @@ pipeline{
         }
         stage('Publishing-Junit-Test'){
             steps{
-                  step([$class: 'JUnitResultArchiver', testResults: 'target/surefire-reports/*.xml'])
+                  step([$class: 'JUnitResultArchiver', testResults: 'gameoflife-core/target/surefire-reports/*.xml'])
             }
         }
-        stage('Build'){
+        
+        stage('Build & Code-Analysis'){
             steps{
-                sh 'mvn package install'
-            }
-        }
-        stage('Code-Analysis'){
-            steps{
-                withSonarQube('MysonarQube'){
-                    sh 'mvn sonar:sonar'
+                withSonarQube('sonar-scaner-4.4.0'){
+                    sh 'mvn install sonar:sonar'
                 }
             }
         }
