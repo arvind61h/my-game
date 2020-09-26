@@ -1,8 +1,6 @@
-pipeline
-{
+pipeline{
     agent {label 'master'}
-    stages
-    {
+    stages{
         stage('Unit-Testing'){
             steps{
                 sh 'mvn test'
@@ -13,13 +11,10 @@ pipeline
                   step([$class: 'JUnitResultArchiver', testResults: 'gameoflife-core/target/surefire-reports/*.xml'])
             }
         }
-        stage('build && SonarQube analysis') {
-            steps {
-                withSonarQubeEnv('Sonar-1') {
-                    // Optionally use a Maven environment you've configured already
-                    //withMaven(maven:'Maven 3.5') {
-                        sh 'mvn clean package sonar:sonar'
-                    }
+        stage('build && SonarQube analysis'){
+            steps{
+                ithSonarQubeEnv('Sonar-1'){
+                    sh 'mvn clean package sonar:sonar'
                 }
             }
         }
