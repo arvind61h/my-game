@@ -23,22 +23,5 @@ pipeline
                 }
             }
         }
-        stage('Deploy Binaries To Artifacts'){
-            steps
-            {
-                 rtUpload(
-                    serverId: 'Artifactory-1',
-                    spec:'''{
-                          "files":
-                          [
-                            {
-                              "pattern": "/*.jar",
-                              "target": "libs-snapshot-local/"
-                            }
-                          ]
-                    }'''
-                 )
-            }
-        }
     }
 }
