@@ -1,31 +1,55 @@
 pipeline{
     agent any
     stages{
-        stage("SCM"){
+        stage('SCM-Checkout'){
             steps{
-                git 'https://github.com/arvind61h/game-of-life.git'
+                git 'https://github.com/arvind61h/spring-petclinic.git'
             }
         }
-        stage('Test'){
+        stage('Unit-Testing'){
             steps{
-                sh 'mvn clean test '
+                sh 'mvn test'
             }
         }
-        stage('Build and Code Analysis')
-        {
-            steps
-            {
-                withSonarQubeEnv("SonarQube")
-                {
-                    sh ' mvn  install sonar:sonar'
+        stage('Publishing-Junit-Test'){
+            steps{
+                  step([$class: 'JUnitResultArchiver', testResults: 'target/surefire-reports/*.xml.'])
+            }
+        }
+        stage('Build'){
+            steps{
+                sh 'mvn package install'
+            }
+        }
+        stage('Code-Analysis'){
+            steps{
+                withSonarQube('MysonarQube'){
+                    sh 'mvn sonar:sonar'
                 }
-
             }
         }
     }
-    post {
-        always{
-            junit keepLongStdio: true, testResults: 'gameoflife-core/target/surefire-reports/*.xml'
+    post
+    {
+        success
+        {
+            steps
+            {
+                 rtUpload(
+                    serverId: 'Artifactory-1',
+                    spec:'''{
+                          "files":
+                          [
+                            {
+                              "pattern": "/*.jar",
+                              "target": "libs-snapshot-local/"
+                            }
+                          ]
+                    }''',
+                 )
+
+
+            }
 
         }
     }
