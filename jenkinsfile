@@ -17,9 +17,12 @@ pipeline{
             }
         }
         stage('Code-Analysis'){
+            tools {
+               sonarQube 'SonarScanner'
+            }
             steps{
                 withSonarQube('MysonarQube'){
-                    sh 'mvn sonar:sonar'
+                    sh 'sonar-scanner'
                 }
             }
         }
