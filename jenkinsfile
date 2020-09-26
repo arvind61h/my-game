@@ -14,7 +14,7 @@ pipeline{
         
         stage('Build & Code-Analysis'){
             steps{
-                withSonarQube('MysonarQube'){
+                withSonarQube('sonar'){
                     sh 'mvn install sonar:sonar'
                 }
             }
