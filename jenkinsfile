@@ -1,6 +1,8 @@
-pipeline{
+pipeline
+{
     agent {label 'master'}
-    stages{
+    stages
+    {
         stage('Unit-Testing'){
             steps{
                 sh 'mvn test'
@@ -38,12 +40,9 @@ pipeline{
                               "target": "libs-snapshot-local/"
                             }
                           ]
-                    }''',
+                    }'''
                  )
-
-
             }
-
         }
     }
 }
