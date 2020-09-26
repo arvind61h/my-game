@@ -11,12 +11,19 @@ pipeline{
                   step([$class: 'JUnitResultArchiver', testResults: 'gameoflife-core/target/surefire-reports/*.xml'])
             }
         }
-        stage('build && SonarQube analysis'){
+        stage('Build and Packaging '){
             steps{
-                withSonarQubeEnv('Sonar-1'){
+                sh 'mvn package install'
+                }
+            }
+        }
+        stage('Code-Analysis'){
+            steps{
+                withSoanrQubeEnv('sonar-1'){
                     sh 'mvn sonar:sonar'
                 }
             }
         }
+
     }
 }
