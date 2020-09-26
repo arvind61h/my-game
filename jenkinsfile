@@ -8,7 +8,7 @@ pipeline{
         }
         stage('Publishing-Junit-Test'){
             steps{
-                  step([$class: 'JUnitResultArchiver', testResults: 'target/surefire-reports/*.xml'])
+                  step([$class: 'JUnitResultArchiver', testResults: 'gameoflife-core/target/surefire-reports/*.xml'])
             }
         }
         stage('Build'){
