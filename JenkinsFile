@@ -12,7 +12,7 @@ pipeline
             }
             post{
                 success{
-                    archiveArtifacts artifacts: 'gameoflife-core/target/*.jar, gameoflife-build/target/*.jar, gameoflife-web/target/*.war', followSymlinks: false
+                    archiveArtifacts artifacts: '**/*.jar, **/*.war', followSymlinks: false
                 }
             }
         }
