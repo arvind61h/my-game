@@ -1,37 +1,28 @@
 pipeline
 {
-    agent {label 'master'}
+    agent any
     stages
     {
-        stage('Unit-Testing')
-        {
-            steps
-            {
-                sh 'mvn clean test'
-            }
-        }
-        stage('Publishing-Junit-Test')
-        {
-            steps
-            {
-                  step([$class: 'JUnitResultArchiver', testResults: 'gameoflife-core/target/surefire-reports/*.xml'])
-            }
-        }
-        stage('Build and Packaging ')
-        {
-            steps
-            {
-                sh 'mvn package install'
-
-            }
-        }
-        stage('Code-Analysis')
+       stage("build & SonarQube analysis")
         {
             steps
             {
                 withSoanrQubeEnv('sonar-1')
                 {
-                    sh 'mvn sonar:sonar'
+                    sh 'mvn clean package sonar:sonar'
+                }
+
+            }
+        }
+        stage('Unit-Testing')
+        {
+            steps
+            {
+                sh 'mvn test'
+            }
+            post{
+                always{
+                    junit 'gameoflife-core/target/surefire-reports/*.xml'
                 }
             }
         }
