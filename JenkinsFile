@@ -6,13 +6,13 @@ pipeline
        stage("build & SonarQube analysis")
         {
             environment {
-                scannerHome = tool 'SonarQubeScanner'
+                scannerHome = tool 'sonar-scanner-4.4.0.2170'
             }
             steps
             {
                 withSoanrQubeEnv('sonar-1')
                 {
-                    sh "${scannerHome}/bin/sonar-scanner"
+                    sh 'mvn clean package sonar:sonar'
                 }
 
             }
