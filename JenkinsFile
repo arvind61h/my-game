@@ -5,14 +5,10 @@ pipeline
     {
         stage('Build and Code Anaylisys ')
         {
-            steps
-            {
-                 withSoanrQubeEnv('sonar1')
-                {
-                    sh 'mvn package org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'
-                }
-
-            }
+            steps {
+              withSonarQubeEnv('My SonarQube Server') {
+                sh 'mvn clean package sonar:sonar'
+              }
         }
         stage('Unit-Testing')
         {
