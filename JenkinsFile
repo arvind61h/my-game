@@ -3,17 +3,11 @@ pipeline
     agent any
     stages
     {
-       stage("build & SonarQube analysis")
+        stage('Build and Packaging ')
         {
-            environment {
-                scannerHome = tool 'sonar-scanner-4.4.0.2170'
-            }
             steps
             {
-                withSoanrQubeEnv('sonar-1')
-                {
-                    sh 'mvn clean package sonar:sonar'
-                }
+                sh 'mvn clean package'
 
             }
         }
@@ -26,6 +20,16 @@ pipeline
             post{
                 always{
                     junit 'gameoflife-core/target/surefire-reports/*.xml'
+                }
+            }
+        }
+        stage('Code-Analysis')
+        {
+            steps
+            {
+                withSoanrQubeEnv('sonar-1')
+                {
+                    sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'
                 }
             }
         }
