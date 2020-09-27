@@ -10,6 +10,11 @@ pipeline
                 sh 'mvn clean package'
 
             }
+            post{
+                success{
+                    archiveArtifacts artifacts: '**/*.jar, **/*.war', followSymlinks: false
+                }
+            }
         }
         stage('Unit-Testing')
         {
