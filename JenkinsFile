@@ -3,13 +3,11 @@ pipeline
     agent any
     stages
     {
-        stage('Build, Packaging and Code Analysis ')
+        stage('Build and Packaging ')
         {
             steps
             {
-               withSonarQubeEnv('My SonarQube Server') {
-                sh 'mvn clean package sonar:sonar'
-              }
+                sh 'mvn clean package'
 
             }
         }
@@ -22,6 +20,16 @@ pipeline
             post{
                 always{
                     junit 'gameoflife-core/target/surefire-reports/*.xml'
+                }
+            }
+        }
+        stage('Code-Analysis')
+        {
+            steps
+            {
+                withSonarQubeEnv('sonar1')
+                {
+                    sh 'mvn sonar:sonar'
                 }
             }
         }
