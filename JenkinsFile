@@ -40,18 +40,19 @@ pipeline
         }
         stage ('Deploying Artifacts to Artifacts server') {
             steps{
-                script{
-                    def server = Artifactory.server('Artifactory-1')
-                    def uploadSpec = """{
-                      "files": [
-                        {
-                          "pattern": "**/*.jar, **/*.war",
-                          "target": "libs-snapshot-local"
-                        }
-                      ]
-                    }"""
-                    server.upload spec: uploadSpec
-                }
+                rtMavenDeployer (
+                    id: "MAVEN_DEPLOYER",
+                    serverId: "Artifactory-1",
+                    releaseRepo: "libs-release-local",
+                    snapshotRepo: "libs-snapshot-local"
+                )
+            }
+        }
+        stage ('Publish build info') {
+            steps {
+                rtPublishBuildInfo (
+                    serverId: "Artifactory-1"
+                )
             }
         }
     }
