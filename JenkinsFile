@@ -55,9 +55,9 @@ pipeline
             }
             post{
                 success{
-                    steps{
+
                         rtPublishBuildInfo (serverId: Artifactory-1 )
-                    }
+
                 }
             }
         }
