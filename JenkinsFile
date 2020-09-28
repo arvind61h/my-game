@@ -39,8 +39,9 @@ pipeline
             }
         }
         stage ('Deploying Artifacts to Artifacts server') {
-            steps {
+            steps{
                 script{
+                    def server = Artifactory.server('Artifactory-1')
                     def uploadSpec = """{
                       "files": [
                         {
@@ -53,7 +54,7 @@ pipeline
                 }
             }
             post{
-                always{
+                success{
                     steps{
                         rtPublishBuildInfo (serverId: Artifactory-1 )
                     }
