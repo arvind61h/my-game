@@ -54,10 +54,5 @@ pipeline
                 }
             }
         }
-        stage('publishing buildinfo'){
-            steps{
-                rtPublishBuildInfo (serverId: Artifactory-1 )
-            }
-        }
     }
 }
