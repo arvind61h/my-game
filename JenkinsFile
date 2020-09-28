@@ -53,12 +53,10 @@ pipeline
                     server.upload spec: uploadSpec
                 }
             }
-            post{
-                success{
-
-                        rtPublishBuildInfo (serverId: Artifactory-1 )
-
-                }
+        }
+        post{
+            always{
+                rtPublishBuildInfo (serverId: Artifactory-1 )
             }
         }
     }
