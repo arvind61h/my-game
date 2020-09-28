@@ -40,11 +40,16 @@ pipeline
         }
         stage ('Deploying Artifacts to Artifacts server') {
             steps{
-                rtMavenDeployer (
-                    id: "MAVEN_DEPLOYER",
+               rtUpload (
                     serverId: "Artifactory-1",
-                    releaseRepo: "libs-release-local",
-                    snapshotRepo: "libs-snapshot-local"
+                    spec: """{
+                            "files": [
+                                    {
+                                        "pattern": "/*.war",
+                                        "target": "libs-snapshot-local"
+                                    }
+                                ]
+                            }"""
                 )
             }
         }
