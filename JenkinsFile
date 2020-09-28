@@ -40,17 +40,18 @@ pipeline
         }
         stage ('Deploying Artifacts to Artifacts server') {
             steps {
-                rtUpload (
-                    serverId: Artifactory-1
-                    spec: """{
-                            "files": [
-                                    {
-                                        "pattern": "**/*.jar, **/*.war",
-                                        "target": "libs-snapshot-local"
-                                    }
-                                ]
-                            }"""
-                )
+                script{
+                    rtUpload (
+                        serverId: Artifactory-1
+                        spec: """{
+                                "files": [
+                                        {
+                                            "pattern": "**/*.jar, **/*.war",
+                                            "target": "libs-snapshot-local"
+                                        }
+                                    ]
+                                }"""
+                }   )
             }
             post{
                 always{
