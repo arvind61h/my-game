@@ -32,7 +32,7 @@ pipeline
         {
             steps
             {
-                withSonarQubeEnv('sonar1')
+                withSonarQubeEnv('MySonarServer')
                 {
                     sh 'mvn sonar:sonar'
                 }
@@ -41,11 +41,11 @@ pipeline
         stage ('Deploying Artifacts to Artifacts server') {
             steps{
                rtUpload (
-                    serverId: "Artifactory-1",
+                    serverId: "Artifactory1",
                     spec: """{
                             "files": [
                                     {
-                                        "pattern": "/*.jar",
+                                        "pattern": "/*.war",
                                         "target": "libs-snapshot-local"
 
                                     }
@@ -57,7 +57,7 @@ pipeline
         stage ('Publish build info') {
             steps {
                 rtPublishBuildInfo (
-                    serverId: "Artifactory-1"
+                    serverId: "Artifactory1"
                 )
             }
         }
