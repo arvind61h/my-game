@@ -1,0 +1,23 @@
+---
+- name: Building Docker Image and Pushing to Registery
+  hosts: docker
+  become: yes
+  tasks:
+    - name: Deploying war file to docker server
+      get_url:
+        url: http://35.233.255.78/artifactory/libs-snapshot-local/gameoflife.war
+        dest: /opt
+        username: admin
+        password: admin123
+#    - name: Copying DockerFile
+#      copy:
+#        src: Dockerfile
+#        dest: /opt/
+#        owner: jenkins
+#        group: jeknins
+    - name: Building Docker image
+      docker_image:
+        path: /opt/Dockerfile
+        name: v705778/mygame
+        tag: v1
+        push: yes
