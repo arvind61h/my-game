@@ -1,7 +1,7 @@
 pipeline{
     agent { label 'docker'}
     stages{
-        stage(SCM-CHeckout){
+        stage('SCM-CHeckout'){
             steps{
                 git branch: 'feature-1', url: 'https://github.com/arvind61h/my-game.git'
             }
