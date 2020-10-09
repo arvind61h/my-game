@@ -1,6 +1,11 @@
 pipeline{
     agent { label 'docker'}
     stages{
+        stage(SCM-CHeckout){
+            steps{
+                git branch: 'feature-1', url: 'https://github.com/arvind61h/my-game.git'
+            }
+        }
         stage('Deploying Artifacts to Testing Server'){
             steps{
 
@@ -19,8 +24,8 @@ pipeline{
                     // as build dependencies.
                     // If not set, the files will be associated with the default build name and build number (i.e the
                     // the Jenkins job name and number).
-                    // buildName: 'holyFrog',
-                    // buildNumber: '42'
+                    buildName: 'BUILD_NUMBER',
+                    buildNumber: 'BUILD_ID'
                 )
 
             }
