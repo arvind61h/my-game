@@ -25,11 +25,11 @@ pipeline{
                                         "target": "libs-snapshot-local"
 
                                     }
-                                ]
-                            }"",
+                            ]
+                    }"",
                     buildName: 'BUILD_NUMBER',
                     buildNumber: 'BUILD_ID'
-                )
+               )
             }
         }
     }
