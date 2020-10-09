@@ -10,7 +10,7 @@ pipeline{
                           "files": [
                             {
                               "pattern": "libs-snapshot-local/*.war",
-                              "target": "/home/jenkins"
+                              "target": "/opt/tomcat9/webapps"
                             }
                           ]
                     }''',
