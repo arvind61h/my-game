@@ -26,7 +26,9 @@ pipeline{
 
                                     }
                                 ]
-                            }"""
+                            }"",
+                            buildName: 'BUILD_NUMBER',
+                            buildNumber: 'BUILD_ID'
                 )
             }
         }
