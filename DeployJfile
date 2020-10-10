@@ -8,8 +8,8 @@ pipeline{
                     spec: '''{
                           "files": [
                             {
-                              "pattern": "libs-snapshot-local/game*",
-                              "target": "/opt/tomcat9/webapps/"
+                              "pattern": "libs-snapshot-local/*.war",
+                              "target": "/opt/tomcat9/webapps"
                             }
                           ]
                     }''',
