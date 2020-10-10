@@ -16,8 +16,8 @@ pipeline{
                     spec: '''{
                           "files": [
                             {
-                              "pattern": "/*.war",
-                              "target": "libs-snapshot-local/"
+                              "pattern": "*.war",
+                              "target": "libs-snapshot-local"
                             }
                          ]
                     }''',
