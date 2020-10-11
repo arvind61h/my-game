@@ -14,8 +14,8 @@
 
         .intro {
             font-family: sans-serif;
-            background: rgb(300, 500, 700);
-            border: 1pt rgb(10, 500, 10) solid;
+            background: rgb(300, 20, 700);
+            border: 1pt rgb(10, 00, 10) solid;
             padding: 8px;
             margin: 4px;
             text-align: justify;
