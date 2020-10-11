@@ -19,7 +19,7 @@
             padding: 8px;
             margin: 4px;
             text-align: justify;
-            color: rgb(25, 25, 25)
+            color: rgb(50, 75, 100)
         }
 
         .footer {
