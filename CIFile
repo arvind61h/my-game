@@ -1,0 +1,65 @@
+pipeline{
+    agent { label 'master'}
+    stages{
+        stage("SCM-Checkout"){
+            steps{
+                git branch: 'feature-1', url: 'https://github.com/arvind61h/my-game.git'
+            }
+        }
+        stage('Unit-Testing'){
+            steps{
+                sh 'mvn test'
+            }
+            post{
+                success{
+                    step([$class: 'JUnitResultArchiver', testResults: 'gameoflife-core/target/surefire-reports/*.xml'])
+                }
+            }
+        }
+        stage("Build-artifacts"){
+            steps{
+                sh 'mvn clean install'
+            }
+            post{
+                success{
+                    archiveArtifacts artifacts: '**/*.jar, **/*.war', followSymlinks: false
+                }
+            }
+        }
+        stage('Code-Coverage-Analysis'){
+            steps{
+                withSonarQubeEnv('MySonarServer'){
+                    sh 'mvn sonar:sonar'
+                }
+            }
+        }
+        stage('Publish Artifacs To Artifactory'){
+            steps{
+                rtUpload (
+                    serverId: 'Artifactory1',
+                    spec: '''{
+                          "files": [
+                            {
+                              "pattern": "**/*.war",
+                              "target": "libs-snapshot-local/"
+                            }
+                         ]
+                    }''',
+                    buildName: 'BUILD_NAME'
+                    buildNumber: 'BUILD_NUMBER'
+                )
+            }
+            post{
+                success{
+                    rtPublishBuildInfo (
+                        serverId: 'Artifactory1',
+                        captureEnv: true,
+                        buildName: 'BUILD_NAME'
+                        buildNumber: 'BUILD_NUMBER'
+
+                    )
+                }
+            }
+        }
+    }
+}
