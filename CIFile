@@ -45,7 +45,7 @@ pipeline{
                             }
                          ]
                     }''',
-                    buildName: 'BUILD_NAME'
+                    buildName: 'BUILD_NAME',
                     buildNumber: 'BUILD_NUMBER'
                 )
             }
@@ -54,7 +54,7 @@ pipeline{
                     rtPublishBuildInfo (
                         serverId: 'Artifactory1',
                         captureEnv: true,
-                        buildName: 'BUILD_NAME'
+                        buildName: 'BUILD_NAME',
                         buildNumber: 'BUILD_NUMBER'
 
                     )
