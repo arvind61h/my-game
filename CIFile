@@ -45,17 +45,12 @@ pipeline{
                             }
                          ]
                     }''',
-                    buildName: '$BUILD_NAME',
-                    buildNumber: '$BUILD_NUMBER'
                 )
             }
             post{
                 success{
                     rtPublishBuildInfo (
                         serverId: 'Artifactory1',
-
-                        buildName: '$BUILD_NAME',
-                        buildNumber: '$BUILD_NUMBER'
 
                     )
                 }
