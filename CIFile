@@ -37,6 +37,7 @@ pipeline{
             steps{
                 rtUpload (
                     serverId: 'Artifactory1',
+                    captureEnv: true,
                     spec: '''{
                           "files": [
                             {
@@ -53,7 +54,7 @@ pipeline{
                 success{
                     rtPublishBuildInfo (
                         serverId: 'Artifactory1',
-                        captureEnv: true,
+
                         buildName: 'BUILD_NAME',
                         buildNumber: 'BUILD_NUMBER'
 
