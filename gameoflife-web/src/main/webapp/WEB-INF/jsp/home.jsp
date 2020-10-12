@@ -35,10 +35,10 @@
         }
 
         .action-button {
-            border-bottom: 2px solid rgb(100, 100, 100);
-            border-left: 2px solid rgb(100, 100, 100);
-            border-top: 2px solid rgb(150, 150, 150);
-            border-right: 2px solid rgb(150, 150, 150);
+            border-bottom: 2px solid rgb(200, 100, 500);
+            border-left: 2px solid rgb(100, 100, 500);
+            border-top: 2px solid rgb(150, 150, 1550);
+            border-right: 2px solid rgb(150, 150, 5150);
             background: silver;
             width: 100px;
             margin: 8px;
