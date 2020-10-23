@@ -24,7 +24,7 @@ pipeline{
             }
             post{
                 always{
-                    script{
+
                         def sendSlackNotifcation(){
                             {
                              if ( currentBuild.currentResult == "SUCCESS" ) {
@@ -36,7 +36,7 @@ pipeline{
                               slackSend color : "danger", message: "${buildSummary}", channel: '#spring-petclinic'
                              }
                         }    }
-                    }
+
                 }
                 success{
                     archiveArtifacts artifacts: '**/*.jar, **/*.war', followSymlinks: false
