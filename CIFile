@@ -52,7 +52,9 @@ pipeline{
             post{
                 success{
                     rtPublishBuildInfo (
-                        serverId: 'ArtifactoryServer1'
+                        serverId: 'ArtifactoryServer1',
+                        buildName: '${BUILD_NAME}',
+                        buildNumber: '${BUILD_ID}'
                     )
                 }
             }
