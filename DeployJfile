@@ -4,7 +4,7 @@ pipeline{
         stage('Deploying Artifacts to Testing Server'){
             steps{
                 rtDownload (
-                    serverId: 'ArtifactoryServer1',
+                    serverId: 'Artifactory-1',
                     spec: '''{
                           "files": [
                             {
