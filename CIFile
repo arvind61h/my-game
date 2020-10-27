@@ -38,7 +38,7 @@ pipeline{
         stage('Publish Artifacs To Artifactory'){
             steps{
                 rtUpload (
-                    serverId: 'ArtifactoryServer1',
+                    serverId: 'Artifactory-1',
                     spec: '''{
                           "files": [
                             {
@@ -52,9 +52,7 @@ pipeline{
             post{
                 success{
                     rtPublishBuildInfo (
-                        serverId: 'ArtifactoryServer1',
-                        buildName: '${BUILD_NAME}',
-                        buildNumber: '${BUILD_ID}'
+                        serverId: 'Artifactory-1'
                     )
                 }
             }
