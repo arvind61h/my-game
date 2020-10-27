@@ -1,5 +1,5 @@
 pipeline{
-    agent { label 'master'}
+    agent { label 'buildServer'}
     stages{
         stage("SCM-Checkout"){
             steps{
@@ -23,30 +23,14 @@ pipeline{
                 sh 'mvn clean install'
             }
             post{
-                always{
-
-                        def sendSlackNotifcation(){
-                            {
-                             if ( currentBuild.currentResult == "SUCCESS" ) {
-                              buildSummary = "Job: ${env.JOB_NAME}\n Status: *SUCCESS*\n Build Report: ${env.BUILD_URL}CI-Build-HTML-Report"
-                              slackSend color : "good", message: "${buildSummary}", channel: '#spring-petclinic'
-                             }
-                             else {
-                              buildSummary = "Job: ${env.JOB_NAME}\n Status: *FAILURE*\n Error description: *${CI_ERROR}* \nBuild Report :${env.BUILD_URL}CI-Build-HTML-Report"
-                              slackSend color : "danger", message: "${buildSummary}", channel: '#spring-petclinic'
-                             }
-                        }    }
-
-                }
                 success{
                     archiveArtifacts artifacts: '**/*.jar, **/*.war', followSymlinks: false
-
                 }
             }
         }
         stage('Code-Coverage-Analysis'){
             steps{
-                withSonarQubeEnv('MySonarServer'){
+                withSonarQubeEnv('SonarQubeServer'){
                     sh 'mvn sonar:sonar'
                 }
             }
@@ -54,7 +38,7 @@ pipeline{
         stage('Publish Artifacs To Artifactory'){
             steps{
                 rtUpload (
-                    serverId: 'Artifactory1',
+                    serverId: 'ArtifactoryServer1',
                     spec: '''{
                           "files": [
                             {
@@ -62,14 +46,13 @@ pipeline{
                               "target": "libs-snapshot-local/"
                             }
                          ]
-                    }''',
+                    }'''
                 )
             }
             post{
                 success{
                     rtPublishBuildInfo (
-                        serverId: 'Artifactory1',
-
+                        serverId: 'ArtifactoryServer1'
                     )
                 }
             }

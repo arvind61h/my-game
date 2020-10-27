@@ -4,17 +4,15 @@ pipeline{
         stage('Deploying Artifacts to Testing Server'){
             steps{
                 rtDownload (
-                    serverId: 'Artifactory1',
+                    serverId: 'ArtifactoryServer1',
                     spec: '''{
                           "files": [
                             {
                               "pattern": "libs-snapshot-local/*.war",
-                              "target": "/opt/tomcat9/webapps/"
+                              "target": "/opt/tomcat/webapps/"
                             }
                           ]
-                    }''',
-                    buildName: 'BUILD_NUMBER',
-                    buildNumber: 'BUILD_ID'
+                    }'''
                 )
 
             }
