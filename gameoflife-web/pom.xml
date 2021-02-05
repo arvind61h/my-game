@@ -14,6 +14,7 @@
     <properties>
         <jetty.port>9090</jetty.port>
         <jetty.stop.port>9999</jetty.stop.port>
+        <sonar.host.url>http://3.137.193.26:9000/</sonar.host.url>
     </properties>
 
     <build>
