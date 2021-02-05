@@ -21,7 +21,7 @@
         <jelastic.environment>wakaleo</jelastic.environment>
         <sonar.host.url>http://3.137.193.26:9000/</sonar.host.url>
         <sonar.login>admin</sonar.login>
-        <sonar.password>sonar</sonar>
+        <sonar.password>sonar</sonar.password>
     </properties>
 
     <scm>
