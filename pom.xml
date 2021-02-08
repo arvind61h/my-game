@@ -381,21 +381,7 @@
                                 <version>${project.version}</version>
                             </dependency>
                         </dependencies>
-                        <distributionManagament>
-                            
-                            <repository>
-                                <id>nexus</id>
-                                <name>Game Of Life Release</name>
-                                <url>http://ec2-3-138-190-196.us-east-2.compute.amazonaws.com:8081/practice/repository/GameOfLife-Release/</url>
-                            </repository>
-                            
-                            <snapshotRepository>
-                                <id>nexus</id>
-                                <name>Game Of Life Snapshot</name>
-                                <url>http://ec2-3-138-190-196.us-east-2.compute.amazonaws.com:8081/practice/repository/GameOfLife-Snapshot/</url>
-                            </snapshotRepository>
-                            
-                        </distributionManagament>
+                        
                     </plugin>
                 </plugins>
             </build>
@@ -438,6 +424,21 @@
                     </plugin>
                 </plugins>
             </build>
+            <distributionManagament>
+                            
+                <repository>
+                    <id>nexus</id>
+                    <name>Game Of Life Release</name>
+                    <url>http://ec2-3-138-190-196.us-east-2.compute.amazonaws.com:8081/practice/repository/GameOfLife-Release/</url>
+                </repository>
+
+                <snapshotRepository>
+                    <id>nexus</id>
+                    <name>Game Of Life Snapshot</name>
+                    <url>http://ec2-3-138-190-196.us-east-2.compute.amazonaws.com:8081/practice/repository/GameOfLife-Snapshot/</url>
+                </snapshotRepository>
+                            
+            </distributionManagament>
             <reporting>
                 <plugins>
                     <plugin>
