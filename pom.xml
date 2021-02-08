@@ -424,7 +424,7 @@
                     </plugin>
                 </plugins>
             </build>
-            <distributionManagament>
+            <distributionManagement>
                             
                 <repository>
                     <id>nexus</id>
@@ -438,7 +438,7 @@
                     <url>http://ec2-3-138-190-196.us-east-2.compute.amazonaws.com:8081/practice/repository/GameOfLife-Snapshot/</url>
                 </snapshotRepository>
                             
-            </distributionManagament>
+            </distributionManagement>
             <reporting>
                 <plugins>
                     <plugin>
