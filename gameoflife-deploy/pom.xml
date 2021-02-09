@@ -52,6 +52,12 @@
             <version>${target.version}</version>
         </dependency>
     </dependencies>
+    <repositories>
+        <repository>
+            <id>nexus</id>
+            <url>http://ec2-18-188-83-246.us-east-2.compute.amazonaws.com:8081/repository/GameOfLife-maven-central/</url>
+        </repository>
+    </repositories>
     <properties>
         <target.version>RELEASE</target.version>
         <tomcat.manager.url>http://localhost:8888/manager</tomcat.manager.url>

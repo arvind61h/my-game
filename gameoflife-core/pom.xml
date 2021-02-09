@@ -57,4 +57,10 @@
             </plugin>
         </plugins>
     </reporting>
+    <repositories>
+        <repository>
+            <id>nexus</id>
+            <url>http://ec2-18-188-83-246.us-east-2.compute.amazonaws.com:8081/repository/GameOfLife-maven-central/</url>
+        </repository>
+    </repositories>
 </project>
